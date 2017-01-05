@@ -4,7 +4,6 @@ THREAD_NUM := $(shell expr $(THREAD_NUM) / 2)
 ifeq ($(shell test $(THREAD_NUM) -gt 4; echo $$?), 0)
 	THREAD_NUM := 4
 endif
-THREAD_NUM := 2
 SRC := src
 INC := inc
 CC := g++
