@@ -6,15 +6,19 @@ pair<double, int> ExpectiMax::search(const Board &b, int dep, const function<dou
         res.first = evaluate(b);
     }else if(dep & 1){ //move
         res.first = -1e15;
+        double value[4] = {-1e15, -1e15, -1e15, -1e15};
 #pragma omp parallel for num_threads(THREAD_NUM)
         for(int i=0;i<4;i++){
             Board nb = b;
-            double value = nb.move(i);
+            double tmpValue = nb.move(i);
             if(nb == b)continue;
-            value += search(nb, dep - 1, evaluate).first;
-            if(Helper::cmpDouble(value, res.first) > 0){
+            tmpValue += search(nb, dep - 1, evaluate).first;
+            value[i] = tmpValue;
+        }
+        for(int i=0;i<4;i++){
+            if(Helper::cmpDouble(value[i], res.first) > 0){
                 res.second = i;
-                res.first = value;
+                res.first = value[i];
             }
         }
     }else{ //evil
