@@ -1,0 +1,5 @@
+ai
+*.dat.*
+.*.swp
+log
+*.o
