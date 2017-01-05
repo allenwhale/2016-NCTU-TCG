@@ -13,7 +13,7 @@ class Statistics{
     public:
         double avgScore;
         unsigned maxScore;
-        unsigned maxTile;
+        unsigned maxTile, untilMaxTile, untilMaxScore;
         __int128 round, totalRound, winRound610, winRound2584, totalStep, totalMoveInterval, totalEvilInterval;
         vector<int> scoreRangeCount;
         Statistics();

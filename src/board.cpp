@@ -68,6 +68,21 @@ unsigned Board::getMaxTile() const {
     return res;
 }
 
+unsigned Board::getRound() const {
+    unsigned sum = getSum();
+    return (sum / 6) * 4 + sum % 6;
+}
+
+unsigned Board::getSum() const {
+    unsigned res = 0;
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+            res += Helper::getFib(get(i, j));
+        }
+    }
+    return res;
+}
+
 unsigned Board::move(int dir){
     //URDL
     Board nb;

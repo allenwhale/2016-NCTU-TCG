@@ -22,6 +22,8 @@ class Board{
         void setRow(int, unsigned);
         void setCol(int, unsigned);
         unsigned getMaxTile() const;
+        unsigned getRound() const;
+        unsigned getSum() const;
         unsigned move(int);
         void rotateRight();
         void reflectUpDown();

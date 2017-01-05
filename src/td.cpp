@@ -36,9 +36,6 @@ void TDFeatureList::adjust(double delta){
         if(Helper::cmpDouble(0, featureTemplate->absErrorTable[feature.feature]) != 0){
             alpha = abs(featureTemplate->errorTable[feature.feature]) / featureTemplate->absErrorTable[feature.feature];
         }
-        //printf("%f %f\n", featureTemplate->errorTable[feature.feature], featureTemplate->absErrorTable[feature.feature]);
-        //printf("a %f %f %f\n", alpha, delta, alpha * delta);
-        //getchar();
         feature.adjust(delta * alpha);
         featureTemplate->absErrorTable[feature.feature] += abs(delta);
         featureTemplate->errorTable[feature.feature] += delta;
