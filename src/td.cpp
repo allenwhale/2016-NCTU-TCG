@@ -57,8 +57,10 @@ TDFeatureTemplate::TDFeatureTemplate(const string &_name, int _type, const vecto
         }
         int readSize = sizeof(tables[i].get()[0]) * size;
         if(read(fd, &(tables[i].get()[0]), readSize) != readSize){
+            close(fd);
             continue;
         }
+        close(fd);
     }
 }
 
@@ -81,8 +83,10 @@ void TDFeatureTemplate::save(){
         int writeSize = sizeof(tables[i].get()[0]) * size;
         if(write(fd, &(tables[i].get()[0]), writeSize) != writeSize){
             perror("writing ");
+            close(fd);
             continue;
         }
+        close(fd);
     }
 }
 
