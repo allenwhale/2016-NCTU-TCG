@@ -1,6 +1,6 @@
 #include "statistics.h"
 
-Statistics::Statistics(): untilMaxTile(0), untilMaxScore(0), totalRound(0), scoreRangeCount(50) {
+Statistics::Statistics(): untilMaxTile(0), untilMaxScore(0), totalRound(0), scoreRangeCount(100) {
     reset();
 }
 
@@ -60,7 +60,7 @@ void Statistics::show(){
     printf("Avg Step            : %f\n", (double)totalStep / (double)round);
     printf("Avg Move Step(us)   : %f\n", (double)totalMoveInterval / (double)totalStep);
     printf("Avg Evil Step(us)   : %f\n", (double)totalEvilInterval / (double)totalStep);
-    for(int i=0;i<20;i++){
+    for(int i=0;i<22;i++){
         printf("%6d ~ %6d: %7.4f%%  %d", 10000 * i, 10000 * (i + 1), 100. * scoreRangeCount[i] / round, scoreRangeCount[i]);
         printf("\t\t");
         printf("%6d ~ %6d: %7.4f%%  %d", 10000 * (i + 20), 10000 * (i + 21), 100. * scoreRangeCount[i + 20] / round, scoreRangeCount[i + 20]);
