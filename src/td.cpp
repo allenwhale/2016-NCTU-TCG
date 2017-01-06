@@ -80,6 +80,7 @@ void TDFeatureTemplate::save(){
         fsync(fd);
         int writeSize = sizeof(tables[i].get()[0]) * size;
         if(write(fd, &(tables[i].get()[0]), writeSize) != writeSize){
+            perror("writing ");
             continue;
         }
     }
@@ -199,7 +200,7 @@ void TD::gameOver(const Board &b, int role){
     static int round = 0;
     if(role == AI_ROLE_MOVE){
         adjust(b);
-        if(round == 100){
+        if(round == 1000){
             save();
             round = 0;
         }
