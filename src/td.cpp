@@ -76,6 +76,7 @@ void TDFeatureTemplate::save(){
         if(fd == -1){
             continue;
         }
+        fsync(fd);
         int writeSize = sizeof(tables[i].get()[0]) * size;
         if(write(fd, &(tables[i].get()[0]), writeSize) != writeSize){
             continue;
