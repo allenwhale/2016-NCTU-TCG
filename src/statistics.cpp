@@ -75,5 +75,6 @@ void Statistics::dump(const string &filename){
     puts("==================================");
     show();
     dup2(oldStdout, 1);
+    fsync(fd);
     close(fd);
 }
