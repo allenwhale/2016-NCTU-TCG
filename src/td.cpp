@@ -74,6 +74,7 @@ void TDFeatureTemplate::save(){
     for(int i=0;i<3;i++){
         int fd = open((name + "_" + tableTypes[i] + ".dat." + to_string(type)).c_str(), O_WRONLY | O_CREAT, 0644);
         if(fd == -1){
+            perror(("save " + name + "_" + tableTypes[i]).c_str());
             continue;
         }
         fsync(fd);

@@ -70,6 +70,10 @@ void Statistics::show(){
 
 void Statistics::dump(const string &filename){
     int fd = open(filename.c_str(), O_WRONLY | O_APPEND | O_CREAT, 0644);
+    if(fd == -1){
+        perror("dump statistics");
+        return;
+    }
     int oldStdout = dup(1);
     dup2(fd, 1);
     puts("==================================");
