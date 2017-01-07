@@ -196,7 +196,10 @@ void TD::save(){
 }
 
 int TD::generateMove(const Board &b){
-    auto res = expectiMax.search(b, 3, bind(&TD::evaluate, this, _1));
+    //b.print();
+    //printf("%d\n", b.getNextTile());
+    //getchar();
+    auto res = expecti.max(b, 3, bind(&TD::evaluate, this, _1));
     if(config.train){
         Board nb = b;
         unsigned score = nb.move(res.second);

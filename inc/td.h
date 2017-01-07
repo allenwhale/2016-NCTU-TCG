@@ -10,7 +10,7 @@
 #include "helper.h"
 #include "ai.h"
 #include "ab.h"
-#include "expectimax.h"
+#include "expecti.h"
 
 using namespace std;
 using namespace std::placeholders;
@@ -81,7 +81,7 @@ class TD : public Ai{
         TDConfig config;
         vector<TDFeatureList> featureStack;
         AlphaBeta ab;
-        ExpectiMax expectiMax;
+        Expecti expecti;
         TD();
         ~TD();
         TD(const string&);

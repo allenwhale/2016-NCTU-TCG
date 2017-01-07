@@ -9,21 +9,21 @@ INC := inc
 CC := g++
 CFLAGS := -O3 -std=c++14 -Wall -Wextra -I $(INC)
 CFLAGS += -fopenmp -DTHREAD_NUM=$(THREAD_NUM)
-EXEC := ./ai
-CONVERT := ./convert
+EXEC = ./ai
+CONVERT = ./convert
 OBJS := \
 	   $(SRC)/board.o \
 	   $(SRC)/table.o \
 	   $(SRC)/td.o \
-	   $(SRC)/tdlambda.o \
 	   $(SRC)/helper.o \
 	   $(SRC)/game.o \
 	   $(SRC)/ai.o \
 	   $(SRC)/ab.o \
-	   $(SRC)/expectimax.o \
+	   $(SRC)/expecti.o \
 	   $(SRC)/statistics.o \
 	   $(SRC)/client.o \
 	   $(SRC)/main.o
+	   #$(SRC)/tdlambda.o 
 
 
 $(SRC)/%.o: $(SRC)/%.cpp
@@ -38,4 +38,7 @@ $(CONVERT): $(SRC)/convert.cpp
 all: $(CONVERT) $(EXEC)
 
 clean:
-	$(RM) $(EXEC) $(OBJS)	
+	$(RM) $(EXEC) $(CONVERT) $(OBJS)	
+
+.DEFAULT_GOAL := all
+.PHONY: all

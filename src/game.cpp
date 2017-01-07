@@ -12,14 +12,6 @@ void Game::setEvil(reference_wrapper<Ai> _evil){
     evil = _evil;
 }
 
-int Game::getNextTile(){
-    static int round = 0;
-    if(board == Board()){
-        round = 0;
-    }
-    return ((round++) % 4 != 3) ? 1 : 3;
-}
-
 unsigned Game::generateMove(){
     unsigned score;
     score = board.move(move.get().generateMove(board));
@@ -28,7 +20,7 @@ unsigned Game::generateMove(){
 
 void Game::generateEvil(){
     int index = evil.get().generateEvil(board);
-    board.set(index / 4, index % 4, getNextTile());
+    board.set(index / 4, index % 4, board.getNextTile());
 }
 
 void Game::gameOver(){
@@ -40,7 +32,7 @@ void Game::run(const string &logFile, int games){
     Statistics statistics;
     for(int i=0;i<games;i++){
         unsigned score = 0, round = 0;
-        board = __int128(0);
+        board = Board();
         generateEvil();
         generateEvil();
         while(true){

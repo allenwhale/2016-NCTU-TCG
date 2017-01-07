@@ -24,6 +24,7 @@ class Board{
         unsigned getMaxTile() const;
         unsigned getRound() const;
         unsigned getSum() const;
+        unsigned getNextTile() const;
         unsigned move(int);
         void rotateRight();
         void reflectUpDown();

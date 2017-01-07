@@ -73,6 +73,10 @@ unsigned Board::getRound() const {
     return (sum / 6) * 4 + sum % 6;
 }
 
+unsigned Board::getNextTile() const {
+    return (getRound() & 3) < 3 ? 1 : 3;
+}
+
 unsigned Board::getSum() const {
     unsigned res = 0;
     for(int i=0;i<4;i++){

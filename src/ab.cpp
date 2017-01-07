@@ -23,11 +23,12 @@ pair<double, int> AlphaBeta::search(const Board &b, double alpha, double beta, i
         res.first = max(maxValue, alpha);
     }else{ //evil
         double minValue = 1e15;
+        int setTile = b.getNextTile();
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
                 if(b.get(i, j) == 0){
                     Board nb = b;
-                    nb.set(i, j, 1);
+                    nb.set(i, j, setTile);
                     double value = search(nb, alpha, beta, dep - 1, evaluate).first;
                     if(Helper::cmpDouble(value, minValue) < 0){
                         minValue = value;
