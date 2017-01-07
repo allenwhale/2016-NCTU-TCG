@@ -22,6 +22,7 @@ OBJS := \
 	   $(SRC)/ab.o \
 	   $(SRC)/expectimax.o \
 	   $(SRC)/statistics.o \
+	   $(SRC)/client.o \
 	   $(SRC)/main.o
 
 

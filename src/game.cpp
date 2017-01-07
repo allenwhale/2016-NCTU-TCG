@@ -22,14 +22,7 @@ int Game::getNextTile(){
 
 unsigned Game::generateMove(){
     unsigned score;
-    while(1){
-        Board nboard = board;
-        score = nboard.move(move.get().generateMove(board));
-        if(nboard != board){
-            board = nboard;
-            break;
-        }
-    }
+    score = board.move(move.get().generateMove(board));
     return score;
 }
 

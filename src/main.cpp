@@ -5,6 +5,7 @@
 #include "td.h"
 #include "helper.h"
 #include "game.h"
+#include "client.h"
 using namespace std;
 
 
@@ -47,9 +48,18 @@ int main(int argc, char **argv){
         exit(0);
     }
     TD td(configFile);
-    Game game;
-    game.setMove(td);
+    Client client;
+    client.setHost("140.113.194.120");
+    client.setPort(21684);
+    client.setStudentId("0316320");
+    client.setPasswd("0316320");
+    client.setMove(td);
+    client.setEvil(td);
+    client.connect();
+    client.run();
+    //Game game;
+    //game.setMove(td);
     //game.setEvil(td);
-    game.run(logFile, gameRound);
+    //game.run(logFile, gameRound);
     return 0;
 }

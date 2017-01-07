@@ -9,8 +9,24 @@ double TDFeature::getValue() const {
     return featureTemplate->weightTable[feature];
 }
 
+double TDFeature::getError() const {
+    return featureTemplate->errorTable[feature];
+}
+
+double TDFeature::getAbsError() const {
+    return featureTemplate->absErrorTable[feature];
+}
+
 void TDFeature::adjust(double delta){
     featureTemplate->weightTable[feature] += delta;
+}
+
+void TDFeature::adjustError(double delta){
+    featureTemplate->errorTable[feature] += delta;
+}
+
+void TDFeature::adjustAbsError(double delta){
+    featureTemplate->absErrorTable[feature] += delta;
 }
 
 void TDFeatureList::append(const TDFeature &feature){
@@ -31,14 +47,13 @@ double TDFeatureList::getValue() const {
 
 void TDFeatureList::adjust(double delta){
     for(auto &feature : featureList){
-        auto featureTemplate = feature.featureTemplate;
         double alpha = 1;
-        if(Helper::cmpDouble(0, featureTemplate->absErrorTable[feature.feature]) != 0){
-            alpha = abs(featureTemplate->errorTable[feature.feature]) / featureTemplate->absErrorTable[feature.feature];
+        if(Helper::cmpDouble(0, feature.getAbsError()) != 0){
+            alpha = abs(feature.getError()) / feature.getAbsError();
         }
         feature.adjust(delta * alpha);
-        featureTemplate->absErrorTable[feature.feature] += abs(delta);
-        featureTemplate->errorTable[feature.feature] += delta;
+        feature.adjustError(delta);
+        feature.adjustAbsError(abs(delta));
     }
 }
 
@@ -196,7 +211,7 @@ int TD::generateEvil(const Board &b){
             return Ai().generateEvil(b);
         }
     }
-    auto res = ab.search(b, -1e15, DBL_MAX, 2, bind(&TD::evaluate, this, _1));
+    auto res = ab.search(b, -1e15, DBL_MAX, 4, bind(&TD::evaluate, this, _1));
     return res.second;
 }
 

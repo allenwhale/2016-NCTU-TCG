@@ -30,7 +30,11 @@ class TDFeature{
         TDFeature();
         TDFeature(unsigned, TDFeatureTemplate*);
         double getValue() const;
+        double getError() const;
+        double getAbsError() const;
         void adjust(double);
+        void adjustError(double);
+        void adjustAbsError(double);
 };
 
 class TDFeatureList{
