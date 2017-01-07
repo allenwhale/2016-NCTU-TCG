@@ -65,7 +65,7 @@ TDFeatureTemplate::TDFeatureTemplate(const string &_name, int _type, const vecto
 }
 
 TDFeatureTemplate::~TDFeatureTemplate(){
-    save();
+    //save();
 }
 
 void TDFeatureTemplate::save(){
