@@ -71,7 +71,7 @@ void Statistics::show(){
         if(activeScoreRange == (i + 30)){
             Helper::activePrint();
         }
-        printf("%6d ~ %6d: %7.4f%%  %d", 10000 * (i + 20), 10000 * (i + 31), 100. * scoreRangeCount[i + 30] / round, scoreRangeCount[i + 30]);
+        printf("%6d ~ %6d: %7.4f%%  %d", 10000 * (i + 30), 10000 * (i + 31), 100. * scoreRangeCount[i + 30] / round, scoreRangeCount[i + 30]);
         Helper::resetPrint();
         puts("");
     }
