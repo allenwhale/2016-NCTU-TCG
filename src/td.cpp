@@ -63,7 +63,7 @@ TDFeatureTemplate::TDFeatureTemplate(const string &_name, int _type, const vecto
     int size = Helper::pow(TD_BASE, indexes.size());
     static string tableTypes[] = {"weight", "error", "abs_error"};
     reference_wrapper<vector<double>> tables[] = {weightTable, errorTable, absErrorTable};
-#pragma omp parallel for num_threads(THREAD_NUM)
+//#pragma omp parallel for num_threads(THREAD_NUM)
     for(int i=0;i<3;i++){
         tables[i].get().resize(size);
         int fd = open((name + "_" + tableTypes[i] + ".dat." + to_string(type)).c_str(), O_RDONLY);
@@ -87,7 +87,7 @@ void TDFeatureTemplate::save(){
     int size = Helper::pow(TD_BASE, indexes.size());
     static string tableTypes[] = {"weight", "error", "abs_error"};
     reference_wrapper<vector<double>> tables[] = {weightTable, errorTable, absErrorTable};
-#pragma omp parallel for num_threads(THREAD_NUM)
+//#pragma omp parallel for num_threads(THREAD_NUM)
     for(int i=0;i<3;i++){
         int fd = open((name + "_" + tableTypes[i] + ".dat." + to_string(type)).c_str(), O_WRONLY | O_CREAT, 0644);
         if(fd == -1){
