@@ -3,3 +3,6 @@ ai
 .*.swp
 log
 *.o
+*.out
+convert
+config.json

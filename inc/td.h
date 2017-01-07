@@ -16,6 +16,8 @@ using namespace std;
 using namespace std::placeholders;
 using json = nlohmann::json;
 
+#define TD_BASE (23)
+
 class TDFeature;
 class TDFeatureTemplate;
 class TDConfig;

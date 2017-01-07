@@ -45,7 +45,7 @@ void TDFeatureList::adjust(double delta){
 TDFeatureTemplate::TDFeatureTemplate(){}
 
 TDFeatureTemplate::TDFeatureTemplate(const string &_name, int _type, const vector<int> &_indexes): name(_name), type(_type), indexes(_indexes) {
-    int size = Helper::pow(22, indexes.size());
+    int size = Helper::pow(TD_BASE, indexes.size());
     static string tableTypes[] = {"weight", "error", "abs_error"};
     reference_wrapper<vector<double>> tables[] = {weightTable, errorTable, absErrorTable};
 #pragma omp parallel for num_threads(THREAD_NUM)
@@ -69,7 +69,7 @@ TDFeatureTemplate::~TDFeatureTemplate(){
 }
 
 void TDFeatureTemplate::save(){
-    int size = Helper::pow(22, indexes.size());
+    int size = Helper::pow(TD_BASE, indexes.size());
     static string tableTypes[] = {"weight", "error", "abs_error"};
     reference_wrapper<vector<double>> tables[] = {weightTable, errorTable, absErrorTable};
 #pragma omp parallel for num_threads(THREAD_NUM)
@@ -112,7 +112,7 @@ TDConfig::TDConfig(const string &configFile){
 unsigned TDFeatureTemplate::getFeature(const Board &b) const {
     unsigned feature = 0;
     for(int idx : indexes){
-        feature = feature * 22 + b.get(idx >> 2, idx & 3);
+        feature = feature * TD_BASE + b.get(idx >> 2, idx & 3);
     }
     return feature;
 }
