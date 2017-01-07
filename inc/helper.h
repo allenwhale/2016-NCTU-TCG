@@ -19,6 +19,8 @@ class Helper{
         static struct timeval tick();
         static long long tock(struct timeval);
         static bool fileExists(const string&);
+        static void activePrint();
+        static void resetPrint();
 };
 
 #endif

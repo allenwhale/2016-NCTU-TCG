@@ -51,3 +51,11 @@ bool Helper::fileExists(const string &filename){
     struct stat st;
     return stat(filename.c_str(), &st) == 0;
 }
+
+void Helper::activePrint(){
+    printf("\033[0;32;31m");
+}
+
+void Helper::resetPrint(){
+    printf("\033[m");
+}

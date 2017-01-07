@@ -14,11 +14,12 @@ void Statistics::reset(){
     totalStep = 0;
     totalEvilInterval = 0;
     totalMoveInterval = 0;
+    activeScoreRange = -1;
     fill(scoreRangeCount.begin(), scoreRangeCount.end(), 0);
 }
 
 void Statistics::update(unsigned score, unsigned step, unsigned _maxTile){
-    scoreRangeCount[score / 10000]++;
+    scoreRangeCount[activeScoreRange = (score / 10000)]++;
     maxScore = max(maxScore, score);
     untilMaxTile = max(untilMaxTile, _maxTile);
     untilMaxScore = max(untilMaxScore, score);
@@ -61,9 +62,17 @@ void Statistics::show(){
     printf("Avg Move Step(us)   : %f\n", (double)totalMoveInterval / (double)totalStep);
     printf("Avg Evil Step(us)   : %f\n", (double)totalEvilInterval / (double)totalStep);
     for(int i=0;i<22;i++){
+        if(activeScoreRange == i){
+            Helper::activePrint();
+        }
         printf("%6d ~ %6d: %7.4f%%  %d", 10000 * i, 10000 * (i + 1), 100. * scoreRangeCount[i] / round, scoreRangeCount[i]);
+        Helper::resetPrint();
         printf("\t\t");
+        if(activeScoreRange == (i + 20)){
+            Helper::activePrint();
+        }
         printf("%6d ~ %6d: %7.4f%%  %d", 10000 * (i + 20), 10000 * (i + 21), 100. * scoreRangeCount[i + 20] / round, scoreRangeCount[i + 20]);
+        Helper::resetPrint();
         puts("");
     }
 }
