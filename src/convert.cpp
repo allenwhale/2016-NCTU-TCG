@@ -37,6 +37,8 @@ void convert(const string &origFile, const string &destFile, int origBase, int d
     }
     write(destFd, dest, sizeof(double) * destSize);
     close(destFd);
+    delete [] orig;
+    delete [] dest;
 }
 
 int main(int argc, char **argv){
