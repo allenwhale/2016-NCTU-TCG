@@ -15,7 +15,7 @@ class Statistics{
         unsigned maxScore;
         unsigned maxTile, untilMaxTile, untilMaxScore;
         int activeScoreRange;
-        __int128 round, totalRound, winRound610, winRound2584, totalStep, totalMoveInterval, totalEvilInterval;
+        __int128 round, totalRound, winRound610, winRound2584, winRound10946, totalStep, totalMoveInterval, totalEvilInterval;
         vector<int> scoreRangeCount;
         Statistics();
         void reset();

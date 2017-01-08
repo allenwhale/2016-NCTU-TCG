@@ -214,6 +214,7 @@ int TD::generateEvil(const Board &b){
             return Ai().generateEvil(b);
         }
     }
+    //auto res = expecti.min(b, 4, bind(&TD::evaluate, this, _1));
     auto res = ab.search(b, -1e15, DBL_MAX, 4, bind(&TD::evaluate, this, _1));
     return res.second;
 }

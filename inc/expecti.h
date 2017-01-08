@@ -10,6 +10,7 @@ using namespace std;
 class Expecti{
     public:
         pair<double, int> max(const Board&, int, const function<double(const Board&)>&);
+        pair<double, int> min(const Board&, int, const function<double(const Board&)>&);
 };
 
 #endif

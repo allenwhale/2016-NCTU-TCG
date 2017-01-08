@@ -11,6 +11,7 @@ void Statistics::reset(){
     round = 0;
     winRound610 = 0;
     winRound2584 = 0;
+    winRound10946 = 0;
     totalStep = 0;
     totalEvilInterval = 0;
     totalMoveInterval = 0;
@@ -19,13 +20,14 @@ void Statistics::reset(){
 }
 
 void Statistics::update(unsigned score, unsigned step, unsigned _maxTile){
-    scoreRangeCount[activeScoreRange = (score / 10000)]++;
+    scoreRangeCount[activeScoreRange = (score / 20000)]++;
     maxScore = max(maxScore, score);
     untilMaxTile = max(untilMaxTile, _maxTile);
     untilMaxScore = max(untilMaxScore, score);
     maxTile = max(maxTile, _maxTile);
     winRound610 += (_maxTile >= 610);
     winRound2584 += (_maxTile >= 2584);
+    winRound10946 += (_maxTile >= 10946);
     avgScore *= ((double)round / (double)(round + 1));
     avgScore += (double)score / (double)(round + 1);
     totalStep += step;
@@ -49,29 +51,36 @@ unsigned Statistics::runMove(const function<unsigned()> &func){
 }
 
 void Statistics::show(){
-    printf("Total Round         : %lld\n", (long long)totalRound);
-    printf("Round               : %lld\n", (long long)round);
-    printf("Max Score           : %d\n", maxScore);
-    printf("Max Tile            : %d\n", maxTile);
-    printf("Until Max Score     : %d\n", untilMaxScore);
-    printf("Until Max Tile      : %d\n", untilMaxTile);
-    printf("Avg Score           : %f\n", avgScore);
-    printf("Win Rate(>=610)     : %f%%\n", 100. * (double)winRound610 / (double)round);
-    printf("Win Rate(>=2584)    : %f%%\n", 100. * (double)winRound2584 / (double)round);
-    printf("Avg Step            : %f\n", (double)totalStep / (double)round);
-    printf("Avg Move Step(us)   : %f\n", (double)totalMoveInterval / (double)totalStep);
-    printf("Avg Evil Step(us)   : %f\n", (double)totalEvilInterval / (double)totalStep);
+    printf("Round               : %11lld\t\t", (long long)round);
+    printf("Total Round         : %11lld\n", (long long)totalRound);
+
+    printf("Max Score           : %11d\t\t", maxScore);
+    printf("Until Max Score     : %11d\n", untilMaxScore);
+
+    printf("Max Tile            : %11d\t\t", maxTile);
+    printf("Until Max Tile      : %11d\n", untilMaxTile);
+
+    printf("Avg Score           : %11.3f\t\t", avgScore);
+    printf("Avg Step            : %11.3f\n", (double)totalStep / (double)round);
+
+    printf("Avg Move Step(us)   : %11.3f\t\t", (double)totalMoveInterval / (double)totalStep);
+    printf("Avg Evil Step(us)   : %11.3f\n", (double)totalEvilInterval / (double)totalStep);
+
+    printf("Win Rate(>=610)     : %10.3f%%\t\t", 100. * (double)winRound610 / (double)round);
+    printf("Win Rate(>=2584)    : %10.3f%%\n", 100. * (double)winRound2584 / (double)round);
+    printf("Win Rate(>=10946)   : %10.3f%%\n", 100. * (double)winRound10946 / (double)round);
+
     for(int i=0;i<30;i++){
         if(activeScoreRange == i){
             Helper::activePrint();
         }
-        printf("%6d ~ %6d: %7.4f%%  %d", 10000 * i, 10000 * (i + 1), 100. * scoreRangeCount[i] / round, scoreRangeCount[i]);
+        printf("%7d ~ %7d: %7.4f%%  %3d", 20000 * i, 20000 * (i + 1), 100. * scoreRangeCount[i] / round, scoreRangeCount[i]);
         Helper::resetPrint();
         printf("\t\t");
         if(activeScoreRange == (i + 30)){
             Helper::activePrint();
         }
-        printf("%6d ~ %6d: %7.4f%%  %d", 10000 * (i + 30), 10000 * (i + 31), 100. * scoreRangeCount[i + 30] / round, scoreRangeCount[i + 30]);
+        printf("%7d ~ %7d: %7.4f%%  %3d", 20000 * (i + 30), 20000 * (i + 31), 100. * scoreRangeCount[i + 30] / round, scoreRangeCount[i + 30]);
         Helper::resetPrint();
         puts("");
     }
