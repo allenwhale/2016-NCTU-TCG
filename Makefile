@@ -9,8 +9,8 @@ INC := inc
 CC := g++
 CFLAGS := -O3 -std=c++14 -Wall -Wextra -I $(INC)
 CFLAGS += -fopenmp -DTHREAD_NUM=$(THREAD_NUM)
-EXEC = ./ai
-CONVERT = ./convert
+EXEC := ./ai
+CONVERT := ./convert
 OBJS := \
 	   $(SRC)/board.o \
 	   $(SRC)/table.o \

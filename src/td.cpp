@@ -199,7 +199,7 @@ int TD::generateMove(const Board &b){
     //b.print();
     //printf("%d\n", b.getNextTile());
     //getchar();
-    auto res = expecti.max(b, 3, bind(&TD::evaluate, this, _1));
+    auto res = expecti.max(b, 5, bind(&TD::evaluate, this, _1));
     if(config.train){
         Board nb = b;
         unsigned score = nb.move(res.second);
@@ -214,8 +214,8 @@ int TD::generateEvil(const Board &b){
             return Ai().generateEvil(b);
         }
     }
-    //auto res = expecti.min(b, 4, bind(&TD::evaluate, this, _1));
-    auto res = ab.search(b, -1e15, DBL_MAX, 4, bind(&TD::evaluate, this, _1));
+    auto res = expecti.min(b, 6, bind(&TD::evaluate, this, _1));
+    //auto res = ab.search(b, -1e15, DBL_MAX, 4, bind(&TD::evaluate, this, _1));
     return res.second;
 }
 

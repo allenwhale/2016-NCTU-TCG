@@ -66,7 +66,7 @@ int main(int argc, char **argv){
     if(trainMode){
         Game game;
         game.setMove(td);
-        game.setEvil(td);
+        //game.setEvil(td);
         game.run(logFile, gameRound);
     }else if(onlineMode){
         Client client;

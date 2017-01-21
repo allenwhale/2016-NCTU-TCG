@@ -90,18 +90,16 @@ unsigned Board::getSum() const {
 unsigned Board::move(int dir){
     //URDL
     Board nb;
-    unsigned score = 0;
+    unsigned score = 0, x;
     if(dir == 0 || dir == 2){
         for(int i=0;i<4;i++){
-            unsigned col = getCol(i);
-            nb.setCol(i, Table::moveTable[dir == 2][col]);
-            score += Table::moveScore[dir == 2][col];
+            nb.setCol(i, Table::moveTable[dir == 2][x = getCol(i)]);
+            score += Table::moveScore[dir == 2][x];
         }
-    }else if(dir == 1 || dir == 3){
+    }else{
         for(int i=0;i<4;i++){
-            unsigned row = getRow(i);
-            nb.setRow(i, Table::moveTable[dir == 1][row]);
-            score += Table::moveScore[dir == 1][row];
+            nb.setRow(i, Table::moveTable[dir == 1][x = getRow(i)]);
+            score += Table::moveScore[dir == 1][x];
         }
     }
     d = nb.d;
@@ -142,8 +140,8 @@ bool Board::isEnd() const {
             }
         }
     }
+    Board nb = *this;
     for(int i=0;i<4;i++){
-        Board nb = *this;
         nb.move(i);
         if(nb != *this)
             return false;
